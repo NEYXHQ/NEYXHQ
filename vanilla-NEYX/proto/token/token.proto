@@ -1,0 +1,11 @@
+syntax = "proto3";
+package Palo_Alt0.vanillaneyx.token;
+
+option go_package = "github.com/Palo_Alt0/vanilla-NEYX/x/token/types";
+
+message Token {
+  uint64 id = 1;
+  string name = 2; 
+  string supply = 3; 
+  string creator = 4;
+}

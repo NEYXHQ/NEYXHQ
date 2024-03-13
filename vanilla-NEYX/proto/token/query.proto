@@ -1,0 +1,58 @@
+syntax = "proto3";
+package Palo_Alt0.vanillaneyx.token;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "token/params.proto";
+import "token/token.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "github.com/Palo_Alt0/vanilla-NEYX/x/token/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/Palo_Alt0/vanillaneyx/token/params";
+  }
+  // Queries a Token by id.
+	rpc Token(QueryGetTokenRequest) returns (QueryGetTokenResponse) {
+		option (google.api.http).get = "/Palo_Alt0/vanillaneyx/token/token/{id}";
+	}
+
+	// Queries a list of Token items.
+	rpc TokenAll(QueryAllTokenRequest) returns (QueryAllTokenResponse) {
+		option (google.api.http).get = "/Palo_Alt0/vanillaneyx/token/token";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetTokenRequest {
+	uint64 id = 1;
+}
+
+message QueryGetTokenResponse {
+	Token Token = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllTokenRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllTokenResponse {
+	repeated Token Token = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// this line is used by starport scaffolding # 3
